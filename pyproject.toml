@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "dkj-business"
+version = "0.1.0"
+description = ""
+authors = ["DKJ <komlavidavo@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+flask = "^3.1.0"
+flask-sqlalchemy = "^3.1.1"
+flask-migrate = "^4.0.7"
+flask-login = "^0.6.3"
+flask-wtf = "^1.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
