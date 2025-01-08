@@ -1,17 +1,44 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Home page
+Home page
 {% endblock %}
 {% block main %}
-    <div class="p-container">
-        <div class="left">left grid</div>
-        <div class="right"> Right grid
-            <div>User profil design</div>
-            <div>Summary</div>
-            <div class="market">Market products grid
-                <div>One div for every product</div>
+<div class="p-container">
+    <div class="left">
+        <a href="####"><img class="logo-img" src="/static/logo/Make up Artist Logo Design/2.png"></a>
+        <div class="subleft d-flex">
+            <div class="subleft-item">Market</div>
+            <div class="subleft-item">My products</div>
+            <div class="subleft-item">My settings</div>
+            <div class="subleft-item">Logout</div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="d-flex flex-row justify-content-between Profil">
+            <div>Profil</div>
+            <div class="left-of-profil"></div>
+        </div>
+        <span class="mt-4">Summary </span>
+        <div class="mt-2 d-flex justify-content-start align-items-center summary">
+            <div class="summary-child">Pending orders
+                <div>15</div>
+            </div>
+            <div class="summary-child">Deliveries
+                <div>12</div>
+            </div>
+            <div class="summary-child">Pending orders
+                <div>0</div>
+            </div>
+        </div>
+        <span>Market</span>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">col</div>
+                <div class="col">col</div>
+                <div class="col">col</div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
