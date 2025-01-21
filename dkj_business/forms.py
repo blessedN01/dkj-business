@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, FloatField, IntegerField, TextAreaField, FileField
-from wtforms.validators import DataRequired, Email, EqualTo, Length
+from wtforms.validators import DataRequired, Email, EqualTo
+from dkj_business.helpers import validate_password
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -9,6 +10,8 @@ class LoginForm(FlaskForm):
 
 class RegisterForm(FlaskForm):
     username = StringField(label='Username', validators=[DataRequired()])
+    first_name = StringField(label='First name', validators=[DataRequired()])
+    last_name = StringField(label='Last name', validators=[DataRequired()])
     email = StringField(label='Email', validators=[DataRequired(), Email()])
     profil_picture = FileField(label='Upload a profil picture')
     phone = StringField(label='Phone number')
@@ -17,6 +20,7 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('Register')
 
 class ProductForm(FlaskForm):
+    img = FileField(label='Product image')
     name = StringField(label='Product Name', validators=[DataRequired()])
     category = StringField(label='Product Category', validators=[DataRequired()])
     description = TextAreaField(label='Description', validators=[DataRequired()])

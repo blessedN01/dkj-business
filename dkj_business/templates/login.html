@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+
+{% block title %}
+    Login
+{% endblock %}
+
+
+{% block main %}
+    <span class="text-center">
+        <div class="container">
+            <img class="logo-img-log mb-4" src="/static/logo/Make up Artist Logo Design/1.png">
+            <h1 class="h3 mb-3 font-weight-normal">
+                Please Log in to your account
+            </h1>
+            <br>
+            <form method="POST" action="{{ url_for('login') }}" class="form-register">
+                {{ form.hidden_tag() }}
+
+                {{ form.email.label }}
+                {{ form.email(class = 'form-control', placeholder ='Email adress') }}
+                {% for error in form.email.errors %}
+                    <p style="color:red;">{{ error }}</p>
+                {% endfor %}
+
+                {{ form.password.label }}
+                {{ form.password(class = 'form-control', placeholder ='Password') }}
+                {% for error in form.password.errors %}
+                    <p style="color:red;">{{ error }}</p>
+                {% endfor %}
+
+                <br>
+                {{ form.submit(class = 'btn btn-primary form-control') }}
+            </form>    
+        </div>
+    </span>
+{% endblock %}
+    
+    
+
+
+
+
+
+
+
+{% if products %}
+<span>Market</span>
+<div class="container">
+    {% for product in products %}
+        <div class="row">
+            <div class="col">col</div>
+            <div class="col">col</div>
+            <div class="col">col</div>
+        </div>
+    {% endfor %}
+
+    <div>No product</div>
+</div>
+{% else %}
+<div class="d-flex align-items-center justify-content-center" style="font-size: 80px; color: rgb(168, 168, 168); font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ; margin-top: 150px">
+    No product in the store
+</div>
+{% endif %}

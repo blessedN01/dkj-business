@@ -1,8 +1,17 @@
-a{ align-self: center;}
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+a{ 
+    align-self: center;
+}
+div > a {
+    text-decoration: none;
+    color: gray;
+}
 
 .p-container{
     display: flex;
-    height: 100vh;
+    height: 100cqmax;
     column-gap: 30px;
 }
 
@@ -37,10 +46,16 @@ a{ align-self: center;}
     margin-top: 10px
 
 }
-.logo-img{
+.logo-img, .logo-img-log{
     width: 100px;
     border-radius: 100%;
     margin-top: 20px;
+    border-color: red;
+    border-style: solid;
+    border-width: 1px;
+}
+.logo-img-log{
+    width: 250px;
 }
 .subleft{
     width: 180px;
@@ -52,20 +67,24 @@ a{ align-self: center;}
 .subleft-item{
     border-radius: 7px;
     color: rgb(108, 106, 106);
-    padding: 10px;
+    padding: 5px;
 }
-.subleft-item:hover{
+.subleft-item:hover, div > div > div > a:hover{
     background-color: rgb(251, 173, 139);
     color:rgb(196, 53, 53);
     padding: 10px;
 }
 .summary{
     height: 75px;
-    column-gap: 20px;
+    column-gap: 15px;
 }
 .summary-child{
-    align-self:center;
-    background-color: green;
-    border-radius: 17px;
+    align-self: center;
+    border-style: solid;
+    background-color: rgb(243, 246, 246);
+    color: rgba(45, 8, 8, 0.611);
+    /* border-radius: 8px; */
     padding: 10px 15px;
+    border-color: rgb(242, 195, 201);
+    border-width: 1px;
 }

@@ -3,42 +3,67 @@
 {% block title %}
 Home page
 {% endblock %}
+
+
+{% block summary %}
+    {% if current_user.is_authenticated %}
+        <div class="border border-success-black border-1 ps-3 mt-2 pb-2 pt-2">
+            <span class="mt-5 h4">Summary </span>
+            <div class="mt-2 d-flex justify-content-start align-items-center summary">
+                <div class="summary-child">Pending orders
+                    <div>15</div>
+                </div>
+                <div class="summary-child">Deliveries
+                    <div>12</div>
+                </div>
+                <div class="summary-child">Pending orders
+                    <div>0</div>
+                </div>
+            </div>    
+        </div>
+    {% endif %}
+{% endblock %}
+
+
 {% block main %}
-<div class="p-container">
-    <div class="left">
-        <a href="####"><img class="logo-img" src="/static/logo/Make up Artist Logo Design/2.png"></a>
-        <div class="subleft d-flex">
-            <div class="subleft-item">Market</div>
-            <div class="subleft-item">My products</div>
-            <div class="subleft-item">My settings</div>
-            <div class="subleft-item">Logout</div>
-        </div>
-    </div>
-    <div class="right">
-        <div class="d-flex flex-row justify-content-between Profil">
-            <div>Profil</div>
-            <div class="left-of-profil"></div>
-        </div>
-        <span class="mt-4">Summary </span>
-        <div class="mt-2 d-flex justify-content-start align-items-center summary">
-            <div class="summary-child">Pending orders
-                <div>15</div>
+    {% if current_user.is_authenticated %}
+        {% if products %}
+            <span>Market</span>
+            <div class="container">
+                {% for product in products %}
+                    <div class="row">
+                        <div class="col">col</div>
+                        <div class="col">col</div>
+                        <div class="col">col</div>
+                    </div>
+                {% endfor %}
             </div>
-            <div class="summary-child">Deliveries
-                <div>12</div>
+        {% else %}
+            <div class="d-flex align-items-center flex-column row-gap-5">
+                <div class="d-flex align-items-center justify-content-center" style="font-size: 80px; color: rgb(168, 168, 168); font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ; margin-top: 150px">
+                    No product in the store
+                </div>
+                <button class="btn btn-primary"><a style="text-decoration: none; color: #fff; " href="{{ url_for('add_product', username=current_user.username) }}">Add Product</a></button>
             </div>
-            <div class="summary-child">Pending orders
-                <div>0</div>
+        {% endif %}
+    {% else %}
+        {% if products %}
+            <span>Market</span>
+            <div class="container">
+                {% for product in products %}
+                    <div class="row">
+                        <div class="col">col</div>
+                        <div class="col">col</div>
+                        <div class="col">col</div>
+                    </div>
+                {% endfor %}
             </div>
-        </div>
-        <span>Market</span>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col">col</div>
-                <div class="col">col</div>
-                <div class="col">col</div>
+        {% else %}
+            <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center justify-content-center" style="font-size: 80px; color: rgb(168, 168, 168); font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ; margin-top: 150px">
+                    No product in the store
+                </div>
             </div>
-        </div>
-    </div>
-</div>
+        {% endif %}
+    {% endif %}
 {% endblock %}

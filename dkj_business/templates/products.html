@@ -1,0 +1,26 @@
+{%  extends "layout.html" %}
+
+{% block main%}
+    <div class="container">
+        {% if procuts %}
+            {% for product in products %}
+                <div class="col container">
+                    <div class="row">
+                        <img src="static/uploads/products_pictures" alt="">
+                    </div>
+                    <div class="row">
+                        <div class="row">{{ product.name }}</div>
+                        <div class="row">{{ product.price }}$</div>
+                    </div>
+                </div>
+                {% endfor %}
+        {% else %}
+            <div class="d-flex align-items-center justify-content-center flex-column" style="margin-top: 100px;">
+                <div class="h1 text-black-50"> No Product available</div>
+                <div>
+                    <button class="btn btn-primary mt-5 "><a class="text-light" style="text-decoration: none;" href="{{ url_for('add_product', username=current_user.username)}}">Add product</a></button>
+                </div>
+            </div>
+        {% endif%}
+    </div>
+{% endblock %}

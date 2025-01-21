@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<span class="text-center">
+    <div class="container">
+        <form method="POST" action="{{ url_for('register') }}" class="form-register pb-5">
+            <!-- <img class="logo-img-log" src="/static/logo/Make up Artist Logo Design/1.png"> -->
+            <img class="logo-img-log mb-4" src="/static/logo/Make up Artist Logo Design/1.png">
+            <h1 class="h3 mb-3 font-weight-normal">
+                Please create your account
+            </h1>
+            <br>
+
+            {{ form.hidden_tag() }}
+
+            {{ form.username.label }}
+            {{ form.username(class= 'form-control mt-1 mb-2', placeholder='Username') }}
+
+            {{ form.first_name.label }}
+            {{ form.first_name(class= 'form-control mt-1 mb-2', placeholder='First Name') }}
+
+            {{ form.last_name.label }}
+            {{ form.last_name(class= 'form-control mt-1 mb-2', placeholder='Last Name') }}
+
+            {{ form.email.label }}
+            {{ form.email(class= 'form-control mt-1 mb-2', placeholder='Email') }}
+
+            {{ form.password.label }}
+            {{ form.password(class= 'form-control mt-1 mb-2', placeholder='Password') }}
+
+            {{ form.confirm_password.label }}
+            {{ form.confirm_password(class= 'form-control mt-1 mb-2', placeholder='Confirm password') }}
+
+            {{ form.profil_picture.label }}
+            {{ form.profil_picture(class= 'form-control mt-1 mb-2', placeholder='Upload profil picture') }}
+
+            {{ form.phone.label }}
+            {{ form.phone(class= 'form-control mt-1 mb-2', placeholder='Phone Number') }}
+
+            <br>
+            {{ form.submit(class= 'form-control btn btn-primary mb-3') }}
+            <br>
+        </form>    
+    </div>
+</span>
+{% endblock %}
+    
+    

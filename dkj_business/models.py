@@ -9,6 +9,8 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key = True)
     cash = db.Column(db.Float(), nullable=False, default=1000)
     username = db.Column(db.String(80), unique=True, index=True, nullable=False)
+    first_name = db.Column(db.String(80), nullable=False)
+    last_name = db.Column(db.String(80), nullable=False)
     profil_picture = db.Column(db.String(80), unique=True, nullable=True)
     email = db.Column(db.String(120), unique=True, index=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
@@ -25,7 +27,7 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"User {self.username}"
-    def set_passaword(self, password):
+    def set_password(self, password):
         self.password_hash = generate_password_hash(password)
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
@@ -52,6 +54,7 @@ class Product(db.Model):
     price = db.Column(db.Float(), nullable=False)
     quantity = db.Column(db.Integer(), nullable=False, default=1)
     available = db.Column(db.Boolean(), default=True)
+    img = db.Column(db.String(80))
     purchase = db.relationship('Purchase', backref='purchase', lazy=True)
 
     def change_description(self, new_desc):

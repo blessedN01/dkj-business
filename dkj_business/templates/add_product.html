@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block main%}
+    <span class="text-center">
+        <form method="POST" action="{{ url_for('add_product', username = current_user.username) }}" class="form-register pb-5">
+            {{ form.hidden_tag() }}
+            
+            <img class="logo-img-log mb-4" src="/static/logo/Make up Artist Logo Design/1.png">
+            <div class="h3 mb-5 mt-5">Please register a product</div>
+            {{ form.img.label }}
+            {{ form.img(class= 'form-control mt-1 mb-2', placeholder='Product image') }}
+
+            {{ form.name.label }}
+            {{ form.name(class= 'form-control mt-1 mb-2', placeholder='Product Name') }}
+
+            {{ form.category.label }}
+            {{ form.category(class= 'form-control mt-1 mb-2', placeholder='Product Category') }}
+
+            {{ form.price.label}}
+            {{ form.price(class= 'form-control mt-1 mb-2', placeholder='Price') }}
+            
+            {{ form.description.label }}
+            {{ form.description(class= 'form-control mt-1 mb-2', placeholder='Description') }}
+
+            {{ form.quantity.label }}
+            {{ form.quantity(class= 'form-control mt-1 mb-2', placeholder='Quantity') }}
+
+            {{ form.submit(class='form-control mt-3 btn btn-primary')}}
+        </form>
+    </span>
+    {% endblock %}

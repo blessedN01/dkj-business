@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+
+{% block main %}
+    <span class="text-center">
+        <div class="container">
+            <img class="logo-img-log mb-4" src="/static/logo/Make up Artist Logo Design/1.png">
+        </div>
+    </span>
+    <div class="container">
+        <div class="row"><img src="static/uploads/profil_pictures{{ current_user.profil_picture }}" alt=""></div>
+        <div class="row">Username:  {{ current_user.username}}</div>
+        <div class="row">Full name: {{ current_user.name}}</div>
+        <div class="row">Balance: {{ current_user.cash }}</div>
+        <div class="row">Email: {{ current_user.email }}</div>
+        <div class="row">Date of birth: {{ current_user.date_of_birth }}</div>
+        <div class="row">Phone number: {{ current_user.phone }}</div>
+        {% if current_user.is_seller %}
+            <div class="row">Status: Seller</div>
+        {% else %}
+            <div class="row">Status: Undefined</div>
+        {% endif %}
+    </div>
+{% endblock %}
