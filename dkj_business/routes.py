@@ -62,7 +62,9 @@ def login():
             if user.check_password(form.password.data):
                 login_user(user)
                 return redirect(url_for('index', username=current_user.username))
-            flash('Wrong password. Please enter the correct password', category='danger')    
+            else:
+                flash('Wrong password. Please enter the correct password', category='danger')   
+        flash(f'No user found', category='danger')   
         return render_template('login.html', form=form)
     return render_template('login.html', form=form)
 @app.route('/logout')
