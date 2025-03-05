@@ -2,7 +2,7 @@
 
 {% block main%}
     <span class="text-center">
-        <form method="POST" action="{{ url_for('add_product', username = current_user.username) }}" class="form-register pb-5">
+        <form method="POST" action="{{ url_for('add_product', username = current_user.username) }}" class="form-register pb-5" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             
             <img class="logo-img-log mb-4" src="/static/logo/Make up Artist Logo Design/1.png">

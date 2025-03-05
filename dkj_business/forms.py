@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, FloatField, IntegerField, TextAreaField, FileField
+from flask_wtf.file import FileField
+from wtforms import StringField, PasswordField, SubmitField, FloatField, IntegerField, TextAreaField #, FileField
 from wtforms.validators import DataRequired, Email, EqualTo
 from dkj_business.helpers import validate_password
 

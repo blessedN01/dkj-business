@@ -96,7 +96,7 @@ def register():
         user = User(username=form.username.data, first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, phone=form.phone.data)
         if file and file_type_allowed(file.filename):
             filename = secure_filename(file.filename)
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)) ,f'{app.config['UPLOAD_FOLDER']}/profil_pictures', filename)
             user.profil_picture = filename
         user.set_password(form.password.data)
         db.session.add(user)
@@ -116,6 +116,7 @@ def add_product(username):
     form = ProductForm()
     if form.validate_on_submit():
         img = form.img.data
+        print(type(img))
         name = form.name.data
         category = form.category.data
         price = form.price.data
@@ -124,7 +125,7 @@ def add_product(username):
         product = Product(product_name=name, owner_id=current_user.id, category=category, description=description, price=price, quantity=quantity)
         if img and file_type_allowed(img.filename):
             filename = secure_filename(img.filename)
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            filepath = os.path.join(os.path.abspath(os.path.dirname(__file__)) ,f'{app.config['UPLOAD_FOLDER']}/products_pictures', filename)
             product.img = filename
         else:
             flash('File error', category='danger')
@@ -134,7 +135,7 @@ def add_product(username):
             
         db.session.add(product)
         db.session.commit()
-        return render_template('products.html', product=product)
+        return redirect('products.html', products=product)
     return render_template('add_product.html', form=form, username=current_user.username)
 
 
