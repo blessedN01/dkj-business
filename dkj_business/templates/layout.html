@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="/static/logo/Make up Artist Logo Design/2.png" rel="icon">
-        <link href="/static/styles.css" rel="stylesheet">
-        <link href="/static/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
-        <title>
-            {% block title %}{% endblock %}
-        </title>
-    </head>
-    <body>
-        {% with messages = get_flashed_messages(with_categories=True) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">
-                        <button type="button" class="ml-2 mb-1 close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
 
-        <div class="p-container">
-            <div class="left">
-                <a href="{{ url_for('profil') }}"><img class="logo-img" src="/static/logo/Make up Artist Logo Design/2.png"></a>
-                <div class="subleft d-flex">
-                    {% if current_user.is_authenticated %}
-                        <div class="subleft-item"><a href="{{ url_for('index') }}">Market</a></div>
-                        <div class="subleft-item"><a href="{{ url_for('myProducts') }}">My products</a></div>
-                        <div class="subleft-item"><a href="{{ url_for('profil') }}">My settings</a></div>
-                        <div class="subleft-item"><a href="{{ url_for('logout') }}">Logout</a></div>
-                    {% else %}
-                        <div class="subleft-item" ><a href="{{ url_for('index') }}">Market</a></div>
-                        <div class="subleft-item"><a href="{{ url_for('login') }}">Login</a></div>
-                        <div class="subleft-item"><a href="{{ url_for('register') }}">Register</a></div>
-                    {% endif %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/logo/Make up Artist Logo Design/2.png" rel="icon">
+    <link href="/static/styles.css" rel="stylesheet">
+    <link href="/static/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+</head>
+
+<body>
+    <script src="/static/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/app.js"></script>
+    <script src="../static/sqljs-all/"></script>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="p-container">
+        <div class="left">
+            <a href="{{ url_for('profil') }}"><img class="logo-img" src="/static/logo/Make up Artist Logo Design/2.png"></a>
+            <div class="subleft d-flex">
+                {% if current_user.is_authenticated %}
+                <div class="subleft-item"><a href="{{ url_for('index') }}">Market</a></div>
+                <div class="subleft-item"><a href="{{ url_for('myProducts') }}">My products</a></div>
+                <div class="subleft-item"><a href="{{ url_for('profil') }}">My settings</a></div>
+                <div class="subleft-item"><a href="{{ url_for('logout') }}">Logout</a></div>
+                {% else %}
+                <div class="subleft-item"><a href="{{ url_for('index') }}">Market</a></div>
+                <div class="subleft-item"><a href="{{ url_for('login') }}">Login</a></div>
+                <div class="subleft-item"><a href="{{ url_for('register') }}">Register</a></div>
+                {% endif %}
             </div>
-            <div class="right">
-                <div>
-                    {% block profil %}
-                    {% endblock %}
-                </div>
-                <div>
-                    {% block summary %}
-                    {% endblock %}
-                </div>
-                <div>
-                    {% block main %}
-                    {% endblock %}
-                </div>
+        </div>
+        <div class="right">
+            <div>
+                {% block profil %} {% endblock %}
             </div>
-        </div>        
-        <script src="/static/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+            <div>
+                {% block summary %} {% endblock %}
+            </div>
+            <div>
+                {% block main %} {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

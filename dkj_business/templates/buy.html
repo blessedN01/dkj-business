@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Buy product
+{% endblock %}
+
+{% block main %}
+    <form action="/buy/{{ product.id }}" method="POST">
+        <div class="d-flex bg-secondary bg-gradient flex-column justify-content-center align-items-center gap-3" style="height: 300px; width: 300px; margin-top: 100px; margin-left: 360px;">
+            <div>Quantity</div>
+            <div>
+                <input name="amount" style="padding-left: 5px;" type="text">
+            </div>
+            <div>
+                <button class="btn bg-warning bg-gradient">Submit</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

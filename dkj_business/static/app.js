@@ -1,0 +1,16 @@
+div = document.querySelector('.ctn ')
+console.log(div)
+tn = document.querySelector('trigger ')
+qty = document.createElement('div ')
+qty.innerText = 'Quantity '
+input = document.createElement('input ')
+qty.classlist.add('')
+input.classlist.add('')
+qty.appendChild(input)
+console.log(btn)
+console.log(qty)
+console.log(input)
+btn.addEventListiner('click', () => {
+    alert('working!')
+    div.appendChild(qty)
+})

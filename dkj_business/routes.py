@@ -1,8 +1,9 @@
 from dkj_business import app
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from dkj_business.models import Product, User, db
 from dkj_business.forms import RegisterForm, LoginForm, ProductForm, ModifyProfileForm, ModifyPasswordForm
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+import re
 from werkzeug.utils import secure_filename
 import os, re
 from dkj_business.helpers import *
@@ -34,15 +35,15 @@ def validate_password(password):
 
 
 
-@app.route("/")
-@app.route("/home")
-@app.route("/index")
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/home", methods=['GET', 'POST'])
+@app.route("/index", methods=['GET', 'POST'])
 def index():
     if current_user.is_authenticated:
         return redirect(url_for('UserIndex', username=current_user.username))
     products = db.session.execute(db.select(Product)).scalars().all()
     # Implement summary requirements
-    # Every things shold be implemented here
+    # Every things should be implemented here
     return render_template("index.html", products=products)
 
 @app.route('/dkj-business/<username>')
@@ -116,7 +117,6 @@ def add_product(username):
     form = ProductForm()
     if form.validate_on_submit():
         img = form.img.data
-        print(type(img))
         name = form.name.data
         category = form.category.data
         price = form.price.data
@@ -135,7 +135,7 @@ def add_product(username):
             
         db.session.add(product)
         db.session.commit()
-        return redirect('products.html', products=product)
+        return redirect(url_for('index'))
     return render_template('add_product.html', form=form, username=current_user.username)
 
 
@@ -177,3 +177,52 @@ def modifyPassword():
         db.session.commit()
         return redirect(url_for('modifyProfil'))
     return render_template('modifyPassword.html')
+
+@app.route("/remove/<int:item_id>", methods=["POST"])
+def delete_item(item_id):
+    item = Product.query.get(item_id)
+    if item:
+        db.session.delete(item)
+        db.session.commit()
+    return redirect(url_for('myProducts'))
+@app.route("/buy/<int:item_id>", methods=["GET","POST"])
+# @login_required
+def buyItem(item_id):
+    if not current_user.is_authenticated:
+        return redirect(url_for("login"))
+    item = Product.query.get(item_id)
+    print(item)
+    print(request.method)
+    if request.method == "POST":
+        
+        qty = request.form.get('amount')
+        print(qty)
+        if current_user.cash >= item.price * int(qty):
+            current_user.cash -= item.price * int(qty)
+            print(current_user.cash)
+            db.session.commit()
+            flash('Product bouth succesfully!', 'success')
+            return redirect(url_for('UserIndex', username=current_user.username))
+        else:
+            flash('You do not have enough money. Please charge you balance and try again!', 'danger')
+        return redirect(url_for('UserIndex', username=current_user.username))
+    else:
+        return render_template('buy.html', product = item)
+
+@app.route("/increaseBalance", methods=["GET","POST"])
+def increaseBalance():
+    if not current_user.is_authenticated:
+        return redirect(url_for("login"))
+    if request.method == "POST":
+        try:
+            amount = int(request.form.get('amount'))
+        except Exception as e:
+            print(e)
+            flash('unexpected type entered', 'danger')
+            return redirect(url_for('increaseBalance'))
+        else:
+            current_user.cash += amount
+            db.session.commit()
+            flash('Balance increased succesfully!', 'success')
+        return redirect(url_for('UserIndex', username=current_user.username))
+    return render_template("increaseBalance.html")
