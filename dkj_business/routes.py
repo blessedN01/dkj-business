@@ -62,6 +62,7 @@ def login():
         if user:
             if user.check_password(form.password.data):
                 login_user(user)
+                flash(f'Welcome {current_user.username}, you are loged in successfully', 'success')
                 return redirect(url_for('index', username=current_user.username))
             else:
                 flash('Wrong password. Please enter the correct password', category='danger')   
@@ -72,6 +73,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    flash('Loged out!', 'success')
     return redirect(url_for('login'))
 
 @app.route("/register", methods=["GET", "POST"])

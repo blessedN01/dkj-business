@@ -1,131 +1,121 @@
-# dkj-business
+# DKJ Business - A Flask-Based E-Commerce Platform
 
-## Video Demo
-[Include a link to your video demo here]
+## Overview
+DKJ Business is a e-commerce platform built using Flask, designed to provide users with a seamless experience for buying and selling products. The application supports user authentication, product management while ensuring security and ease of use. With features like balance management, image uploads, and a structured database, DKJ Business aims to offer a solid foundation for an online marketplace.
 
-## Project Requirements
-This project requires the following dependencies:
+The platform leverages Flask for its backend, Flask-Login for authentication, Flask-SQLAlchemy for database interactions, and Bootstrap for a responsive and user-friendly frontend. While the core functionalities are implemented, there are several planned enhancements to improve user experience and expand feature capabilities.
 
-- Python 3.8 or later
-- Poetry
-- Flask
-- Flask-SQLAlchemy
-- Flask-Migrate
-- Flask-Login
-- Flask-WTF
-- python-dotenv
-- email-validator
+## Features
+- **User Authentication**: Users can register, log in, and log out securely.
+- **Profile Management**: Users can modify their profiles and change passwords (backend implemented, frontend pending).
+- **Product Management**: Users can add, list, buy, and delete products from the marketplace.
+- **Balance Management**: Users can add funds to their accounts to facilitate purchases.
+- **Image Uploads**: Supports user profile pictures and product images with validation.
 
-## Project Description
+## Project Structure and File Descriptions
 
-dkj-business is a dynamic e-commerce platform that allows users to post and purchase products in an online marketplace. The platform supports two types of users: 
+### `run.py`
+This is the entry point of the application. It initializes the Flask app and starts the development server. Running this script will launch the web application, allowing users to interact with the platform.
 
-1. **Sellers** – Users who can post products for sale, manage their inventory, and purchase other users' products.
-2. **Non-Sellers** – Users who can browse the marketplace and purchase products but cannot post items for sale.
+### `dkj_business/__init__.py`
+This module initializes the Flask application, configures the database, and sets up necessary extensions such as Flask-Login. It ensures that the necessary environment settings are correctly loaded before the application starts.
 
-### Key Features
-- **User Registration & Authentication:** Secure login and registration system using Flask-Login.
-- **Marketplace:** A central hub displaying all available products.
-- **Product Management:** Sellers can add, update, and remove their products from the market.
-- **User Profiles & Balance Management:** Users can view their profile details, including their balance, and update information as needed.
-- **Secure Transactions:** Ensuring that purchases are processed securely.
+### `dkj_business/models.py`
+This file defines the SQLAlchemy models for the project. The two primary models are:
+- **User**: Stores user details such as username, email, password hash, balance, and profile image.
+- **Product**: Stores product details including name, price, owner ID, and image.
 
-Upon logging in, users are directed to the "Market" homepage, where all available products are displayed. Sellers can manage their inventory through the "My Products" section, while all users have access to a settings section to review personal information and balance details.
+These models help structure the database and enable efficient data retrieval and manipulation.
 
-## Project Structure
-The project consists of several key directories and files that handle different aspects of the platform:
+### `dkj_business/forms.py`
+Defines WTForms-based forms used in the application. The forms provide a secure way to handle user input for various functionalities, including:
+- Registration
+- Login
+- Product addition
+- Profile modification
 
-### Main Directory
-- **dkj_business/** (Main project package)
-  - **static/** – Contains Bootstrap files and media assets (uploaded product images, user profile pictures, and project logos).
-  - **templates/** – Stores HTML templates:
-    - `add_product.html` – Page for sellers to add a new product.
-    - `index.html` – Homepage displaying all products for sale.
-    - `layout.html` – Base template extended by all other pages.
-    - `login.html` – Login page for user authentication.
-    - `products.html` – Displays a seller's products for sale.
-    - `profil.html` – User profile page to view personal information.
-    - `register.html` – Registration page for new users.
-  - **forms.py** – Defines FlaskForm classes to manage all form handling.
-  - **models.py** – Defines database schemas using Flask-SQLAlchemy.
-  - **routes.py** – Contains route definitions that control webpage navigation and backend logic.
-  - **helpers.py** – Utility functions for password validation and file type checking.
-  - **run.py** – The main entry point to start the application.
+### `dkj_business/helpers.py`
+Contains utility functions that support the main application logic, including:
+- Password validation to ensure strong credentials.
+- File type validation to restrict image uploads to acceptable formats.
 
-### Additional Directories
-- **instance/** – Contains the project's database files.
-- **migrations/** – Stores database migration scripts generated by Flask-Migrate.
+### `dkj_business/routes.py`
+This is the core of the application, defining the various routes and their corresponding functionalities:
+- `index()`: Displays available products on the homepage.
+- `UserIndex()`: Provides a dashboard for logged-in users.
+- `login()`: Handles user authentication.
+- `logout()`: Logs out the user securely.
+- `register()`: Manages new user registrations.
+- `add_product()`: Allows users to add new products.
+- `myProducts()`: Displays a user's listed products.
+- `profil()`: Loads the user profile page.
+- `modifyProfil()`: Enables profile modification (UI pending).
+- `modifyPassword()`: Allows password updates (UI pending).
+- `delete_item()`: Facilitates product deletion.
+- `buyItem()`: Processes product purchases.
+- `increaseBalance()`: Adds funds to the user's balance.
 
-## Routes & Functionality
-### Authentication
-- `/login` – Allows users to log in.
-- `/logout` – Logs the user out.
-- `/register` – Handles user registration.
+### `dkj_business/templates/`
+Holds all HTML templates used for rendering views. These templates are built using Flask’s Jinja2 templating engine to dynamically display content based on user actions and database queries.
 
-### Product Management
-- `/` or `/home` or `/index` – Displays all products in the marketplace.
-- `/dkj-business/<username>` – Displays the marketplace for a logged-in user.
-- `/<username>/add_products` – Allows a seller to add a new product.
-- `/myProducts` – Displays a list of products owned by the logged-in seller.
-
-### User Profile
-- `/profil` – Displays the user profile.
-- `/modifyProfil` – Allows users to modify their profile details.
-- `/modifyPassword` – Enables users to change their password securely.
+### `dkj_business/static/`
+Contains static files, including CSS and JavaScript, to enhance the frontend appearance and functionality.
 
 ## Design Choices
-Several key design decisions were made during development:
 
-1. **Flask-SQLAlchemy for ORM:** Simplifies database interactions and provides robust data modeling.
-2. **Flask-Login for Authentication:** Enables secure user authentication and session management.
-3. **Flask-WTF for Form Handling:** Provides an easy-to-use framework for handling user inputs securely.
-4. **Poetry for Dependency Management:** Streamlines package installation and management.
-5. **Bootstrap for Frontend Styling:** Ensures a responsive and visually appealing UI.
-6. **Security Enhancements:**
-   - Password validation (minimum length, uppercase, lowercase, digit, special character requirement).
-   - File upload validation to restrict allowed file types.
-   - Secure session management with Flask-Login.
+### Flask for Backend
+Flask was chosen for its simplicity, flexibility, and strong community support. It provides an excellent foundation for building scalable web applications while allowing seamless integration with third-party extensions.
 
-These choices were made to keep the project modular, maintainable, and scalable for future enhancements.
+### Flask-Login for Authentication
+Flask-Login simplifies user authentication, session management, and route protection, ensuring only authorized users can access certain parts of the application.
 
-## Installation and Setup
-To set up and run the project locally, follow these steps:
+### Flask-SQLAlchemy for Database Management
+Using SQLAlchemy as an Object-Relational Mapper (ORM) makes database interactions more efficient and Pythonic, reducing the complexity of raw SQL queries.
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/dkj-business.git
-   cd dkj-business
-   ```
+### Bootstrap for Frontend
+Bootstrap was utilized for its responsive design capabilities, providing a clean and modern interface with minimal effort.
 
-2. Install dependencies using Poetry:
-   ```sh
+## Security Considerations
+- **Password Hashing**: User passwords are stored securely using hashing techniques to prevent unauthorized access.
+- **File Upload Validation**: Only specific file types are allowed to prevent security vulnerabilities related to malicious uploads.
+- **User Authentication & Authorization**: Ensures that protected routes can only be accessed by logged-in users.
+
+## Known Issues and Unimplemented Features
+While the core functionalities are operational, a few aspects remain incomplete:
+- **Profile and Password Modification UI**: While the backend logic exists, the user interface for modifying profiles and changing passwords is not yet implemented.
+- **Limited Payment Processing**: The balance system is manually adjusted instead of integrating with a real payment gateway.
+- **Enhanced Product Search and Filtering**: Currently, there are no advanced search options to filter products based on criteria like price range, category, or seller.
+
+## How to Run the Project
+To get started with DKJ Business, follow these steps:
+
+1. **Install Dependencies**
+   Ensure you have Poetry installed, then run:
+   ```bash
    poetry install
    ```
 
-3. Set up the environment variables:
-   ```sh
-   cp .env.example .env
-   ```
-   Edit the `.env` file with appropriate values.
-
-4. Initialize the database:
-   ```sh
-   flask db upgrade
+2. **Set Up the Database**
+   Apply database migrations using:
+   ```bash
+   poetry run flask db upgrade
    ```
 
-5. Run the application:
-   ```sh
+3. **Run the Application**
+   Start the Flask server by executing:
+   ```bash
    poetry run flask run
    ```
 
+4. **Access the Platform**
+   Open `http://127.0.0.1:5000` in your web browser to start using DKJ Business.
+
 ## Future Improvements
-- **JavaScript-based Popups:** Implementing modals for product addition instead of redirecting to a new page.
-- **Search & Filtering:** Allowing users to search and filter products by category, price, or name.
-- **Payment Gateway Integration:** Enabling real transactions for purchases.
-- **Enhanced User Dashboard:** Providing statistics on user purchases and sales.
+To enhance the platform’s capabilities, the following features are planned for future development:
+- **Frontend Forms for Profile Modification and Password Change**: Implement UI elements to allow users to update their profiles and change passwords easily.
+- **Payment Gateway Integration**: Connect the balance system to real payment processors (e.g., Stripe or PayPal) for seamless transactions.
+- **Improved Product Search & Filtering**: Enhance the user experience with better navigation and filtering options.
+- **Admin Panel**: Introduce an administrative interface for managing users, products, and transactions.
 
 ## Conclusion
-The dkj-business project is a fully functional e-commerce platform designed with Flask. It provides user authentication, product management, and a secure transaction system. The project structure is designed to be modular and scalable, making it easy to expand and improve in the future.
-
-This README provides an overview of the project, including its purpose, functionality, and technical implementation. Further improvements could include integrating payment gateways, enhancing search functionality, and improving the UI for a better user experience.
-
+DKJ Business is a functional and scalable Flask-based e-commerce platform that lays the groundwork for a fully-featured online marketplace. While several key features are in place, there are still improvements to be made to enhance usability, security, and functionality. This README provides an in-depth look at the project's architecture, design decisions, and future roadmap, ensuring clear documentation for developers and contributors.
