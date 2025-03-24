@@ -16,8 +16,8 @@ class RegisterForm(FlaskForm):
     email = StringField(label='Email', validators=[DataRequired(), Email()])
     profil_picture = FileField(label='Upload a profil picture')
     phone = StringField(label='Phone number')
-    password = PasswordField(label='Password', validators=[DataRequired()])
-    confirm_password = PasswordField(label='Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    password = PasswordField(label='Password', validators=[validate_password])
+    confirm_password = PasswordField(label='Confirm Password', validators=[DataRequired(), EqualTo('password', "Passwords does not match")])
     submit = SubmitField('Register')
 
 class ProductForm(FlaskForm):

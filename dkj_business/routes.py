@@ -81,9 +81,10 @@ def register():
     # {{ form.hidden_tag() }}
     form =  RegisterForm()
     if form.validate_on_submit():
-        user_exists = db.session.execute(db.select(User).where(User.email==form.email.data)).scalars()
-        if not user_exists:
-            flash('This email has been already used to create an accont. Please use another email', category='info')
+        print('validated')
+        user_exists = db.session.execute(db.select(User).where(User.email==form.email.data)).scalar()
+        if user_exists:
+            flash('This email has been already used to create an account. Please use another email', category='danger')
             return render_template('register.html', form=form)
         passwordErrors = form.password.errors
         emailErrors = form.email.errors
@@ -107,7 +108,15 @@ def register():
         if file:
             file.save(filepath)
         login_user(user)
+        flash(f'User {current_user.username} registered successfully!', 'success')
         return redirect(url_for("UserIndex", username = current_user.username))
+    if form.email.errors or form.password.errors or form.confirm_password:
+        for error in form.email.errors:
+            flash(error, category='danger')
+        for error in form.password.errors:
+            flash(error, category='danger')
+        for error in form.confirm_password.errors:
+            flash(error, category='danger')
     return render_template("register.html", form=form)
     
 
@@ -193,15 +202,11 @@ def buyItem(item_id):
     if not current_user.is_authenticated:
         return redirect(url_for("login"))
     item = Product.query.get(item_id)
-    print(item)
-    print(request.method)
     if request.method == "POST":
-        
         qty = request.form.get('amount')
-        print(qty)
         if current_user.cash >= item.price * int(qty):
             current_user.cash -= item.price * int(qty)
-            print(current_user.cash)
+            Product.quantity -= int(qty)
             db.session.commit()
             flash('Product bouth succesfully!', 'success')
             return redirect(url_for('UserIndex', username=current_user.username))
