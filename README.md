@@ -5,6 +5,46 @@ DKJ Business is a e-commerce platform built using Flask, designed to provide use
 
 The platform leverages Flask for its backend, Flask-Login for authentication, Flask-SQLAlchemy for database interactions, and Bootstrap for a responsive and user-friendly frontend. While the core functionalities are implemented, there are several planned enhancements to improve user experience and expand feature capabilities.
 
+## Technologies Used
+
+This project utilizes a combination of backend and frontend technologies to provide a seamless user experience.
+
+### Backend Technologies
+
+- **Python** – Core programming language for the project.
+
+**Flask** – Web framework for handling routes and backend logic.
+
+**Flask-Login** – Manages user authentication and session handling.
+
+**Flask-WTF** – Enables form validation and handling.
+
+**Flask-SQLAlchemy** – ORM for database interactions.
+
+**Werkzeug** – Utility for password hashing and request handling.
+
+### Database & ORM
+
+**SQLite** – Stores user and product data.
+
+**SQLAlchemy** – ORM used to interact with the database.
+
+### Frontend Technologies
+
+**HTML** – Provides the structure for web pages.
+
+**CSS** – Styles the UI elements.
+
+**Bootstrap** – Enhances responsive design.
+
+**JavaScript** – Adds interactivity and dynamic features.
+
+### Other Tools & Utilities
+
+**Jinja2** – Templating engine for rendering dynamic content.
+
+**Poetry** – Dependency management for the project.
+
 ## Features
 - **User Authentication**: Users can register, log in, and log out securely.
 - **Profile Management**: Users can modify their profiles and change passwords (backend implemented, frontend pending).
@@ -90,7 +130,9 @@ While the core functionalities are operational, a few aspects remain incomplete:
 To get started with DKJ Business, follow these steps:
 
 1. **Install Dependencies**
-   Ensure you have Poetry installed, then run:
+   Ensure you have Python installed.
+   Setup a virtual environement, activate it & install Poetry
+    then run:
    ```bash
    poetry install
    ```
@@ -98,13 +140,13 @@ To get started with DKJ Business, follow these steps:
 2. **Set Up the Database**
    Apply database migrations using:
    ```bash
-   poetry run flask db upgrade
+   poetry run flask --app dkj_business:create_app db upgrade
    ```
 
 3. **Run the Application**
    Start the Flask server by executing:
    ```bash
-   poetry run flask run
+   poetry run python run.py
    ```
 
 4. **Access the Platform**

@@ -9,6 +9,8 @@ import os, re
 from dkj_business.helpers import *
 
 login_manager = LoginManager(app)
+login_manager.login_view = "login"
+login_manager.login_message_category = "info"
 
 @login_manager.user_loader
 def user_loader(user_id):
@@ -146,6 +148,7 @@ def add_product(username):
             
         db.session.add(product)
         db.session.commit()
+        flash('Product added successfully', category='success')
         return redirect(url_for('index'))
     return render_template('add_product.html', form=form, username=current_user.username)
 
