@@ -195,10 +195,11 @@ def modifyPassword():
 @app.route("/remove/<int:item_id>", methods=["POST"])
 def delete_item(item_id):
     item = Product.query.get(item_id)
+    ProductName = item.product_name
     if item:
         db.session.delete(item)
         db.session.commit()
-        flash(f'{item.product_name} removed successfully', 'sucess')
+        flash(f'{ProductName} removed successfully', 'sucess')
     return redirect(url_for('myProducts'))
 @app.route("/buy/<int:item_id>", methods=["GET","POST"])
 # @login_required
