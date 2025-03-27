@@ -199,7 +199,7 @@ def delete_item(item_id):
     if item:
         db.session.delete(item)
         db.session.commit()
-        flash(f'{ProductName} removed successfully', 'sucess')
+        flash(f'{ProductName} removed successfully', 'success')
     return redirect(url_for('myProducts'))
 @app.route("/buy/<int:item_id>", methods=["GET","POST"])
 # @login_required

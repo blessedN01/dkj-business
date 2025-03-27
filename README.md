@@ -1,5 +1,8 @@
 # DKJ Business - A Flask-Based E-Commerce Platform
 
+## The presentation vidéo link:
+https://youtu.be/56PtKS3RjGo
+
 ## Overview
 DKJ Business is a e-commerce platform built using Flask, designed to provide users with a seamless experience for buying and selling products. The application supports user authentication, product management while ensuring security and ease of use. With features like balance management, image uploads, and a structured database, DKJ Business aims to offer a solid foundation for an online marketplace.
 
