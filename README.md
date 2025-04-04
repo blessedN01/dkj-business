@@ -14,7 +14,7 @@ This project utilizes a combination of backend and frontend technologies to prov
 
 ### Backend Technologies
 
-- **Python** – Core programming language for the project.
+**Python** – Core programming language for the project.
 
 **Flask** – Web framework for handling routes and backend logic.
 
